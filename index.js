@@ -63,8 +63,14 @@ const ctrl = {
   hoverResizeBar(evt, opts) {
     if(ctrl.staElSize === null) {
       opts && ctrl.setOpts(opts);
-      const act = ctrl.getHorizCriticalVal(evt) < 4 ? 'enterResizeBar' : 'leaveResizeBar';
-      ctrl[act](evt);
+      const { currentTarget, target } = evt;
+      // 不hover目标不是目标元素的子元素，或者鼠标距离操作区域大于4像素，则认为是离开
+      const isLeave = (
+          (
+            currentTarget.contains && !currentTarget.contains(target)
+          ) || ctrl.getHorizCriticalVal(evt) > 4
+        );
+      ctrl[`${isLeave ? 'leave' : 'enter'}ResizeBar`](evt);
     }
   },
   // 鼠标进入拖拽区
