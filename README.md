@@ -4,7 +4,7 @@
 
 ## 在React场景中横向拖拽的使用示例
 
-```javascript
+```jsx
 import sizeCtrl from './resize.js';
 
 const asideResizeOpts = {
